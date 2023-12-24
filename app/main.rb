@@ -1,18 +1,27 @@
 def tick args
-  args.outputs.labels  << [640, 540, 'Hello World!', 5, 1]
-  args.outputs.labels  << [640, 500, 'Docs located at ./docs/docs.html and 100+ samples located under ./samples', 5, 1]
-  args.outputs.labels  << [640, 460, 'Join the Discord server! https://discord.dragonruby.org', 5, 1]
+  args.state.player.x ||=640
+  args.state.player.y ||=480
+  args.state.player.d ||=0
 
-  args.outputs.sprites << { x: 576,
-                            y: 280,
-                            w: 128,
-                            h: 101,
-                            path: 'dragonruby.png',
-                            angle: args.state.tick_count }
+  if args.inputs.keyboard.down
+    args.state.player.y -= 1
+    args.state.player.d = 270
+  elsif args.inputs.keyboard.up
+    args.state.player.y += 1
+    args.state.player.d = 90
+  elsif args.inputs.keyboard.left
+    args.state.player.x -= 1
+    args.state.player.d = 180
+  elsif args.inputs.keyboard.right
+    args.state.player.x += 1
+    args.state.player.d = 0
+  end
 
-  args.outputs.labels  << { x: 640,
-                            y: 60,
-                            text: './mygame/app/main.rb',
-                            size_enum: 5,
-                            alignment_enum: 1 }
+  args.outputs.primitives << {x: args.state.player.x,
+                              y: args.state.player.y,
+                              w: 32,
+                              h: 32,
+                              angle: args.state.player.d,
+                              path: "sprites/circle/blue.png"}.sprite!
+
 end
