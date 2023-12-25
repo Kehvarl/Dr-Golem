@@ -1,27 +1,18 @@
+
+require('app/classes/entity.rb')
+
 def tick args
-  args.state.player.x ||=640
-  args.state.player.y ||=480
-  args.state.player.d ||=0
+  args.state.player ||= Entity.new({})
 
   if args.inputs.keyboard.down
-    args.state.player.y -= 1
-    args.state.player.d = 270
+    args.state.player.move(0,-1)
   elsif args.inputs.keyboard.up
-    args.state.player.y += 1
-    args.state.player.d = 90
+    args.state.player.move(0,1)
   elsif args.inputs.keyboard.left
-    args.state.player.x -= 1
-    args.state.player.d = 180
+    args.state.player.move(-1, 0)
   elsif args.inputs.keyboard.right
-    args.state.player.x += 1
-    args.state.player.d = 0
+    args.state.player.move(1,0)
   end
 
-  args.outputs.primitives << {x: args.state.player.x,
-                              y: args.state.player.y,
-                              w: 32,
-                              h: 32,
-                              angle: args.state.player.d,
-                              path: "sprites/circle/blue.png"}.sprite!
-
+  args.outputs.primitives << args.state.player.render()
 end
