@@ -14,5 +14,7 @@ def tick args
     args.state.player.move(1,0)
   end
 
-  args.outputs.primitives << args.state.player.render()
+  args.state.player.tick args
+
+  args.outputs.primitives << args.state.player
 end
