@@ -45,6 +45,15 @@ class Entity
   end
 
   def move(dx=0, dy=0)
+    if @dx < 0
+      @anim_state = 1
+    elsif @dx > 0
+      @anim_state = 2
+    elsif @dy < 0
+      @anim_state = 3
+    elsif @dy > 0
+      @anim_state = 4
+    end
     @dx += dx
     @dy += dy
   end
