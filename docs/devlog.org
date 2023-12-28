@@ -1,0 +1,19 @@
+* Sporadic Dev Log
+
+** 2023-12-27
+- Working on
+  + Generic Entity
+    * Animated Sprite
+    * Based on Tilesheets
+      * Player Spritesheet
+	* Sprites: 48x48
+	* Idle Down 6
+	* Idle Right 6
+	* Idle Up 6
+	* Walk Down 6
+	* Walk Right 6
+	* Walk Up 6
+	* Attack Down 4
+	* Attack Right 4
+	* Attack Up 4
+	* Die 3

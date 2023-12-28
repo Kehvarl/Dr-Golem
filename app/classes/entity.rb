@@ -8,31 +8,43 @@ class Entity
                 :anchor_x, :anchor_y
   
   def initialize args
-    @x = args.x || 0
-    @y = args.y || 0
-    @w = args.w || 32
-    @h = args.h || 32
+    @x = args.x || 640
+    @y = args.y || 480
+    @w = args.w || 96
+    @h = args.h || 96
     @dx = 0
     @dy = 0
-    @anim_frames = args.walk_anim || [[0], [0], [0], [0], [0]] # Idle, R, L, U, D
+    @cooldown = 0
+    # Idle Down
+    # Idle Right
+    # Idle Up
+    # Walk Down
+    # Walk Right
+    # Walk Up
+    # Attack Down
+    # Attack Right
+    # Attack Up
+    # Die
+    @anim_frames = args.walk_anim || [6, 6, 6, 6, 6, 6, 4, 4, 4, 3]
     @anim_state = args.anim_state || 0
     @frame = args.frame || 0
     @frame_delay = args.frame_delay || 10
     @frame_counter = @frame_delay
     @tile_x = @tile_base_x = args.tile_x || 0
     @tile_y = @tile_base_y = args.tile_y || 0
-    @tile_w = args.tile_w || 80
-    @tile_h = args.tile_h || 80
-    @path = args.path || 'sprites/circle/blue.png'
+    @tile_w = args.tile_w || 48
+    @tile_h = args.tile_h || 48
+    @flip_horizontally = false
+    @path = args.path || 'sprites/mwoods/characters/player.png'
   end
 
   def tick args
     @frame_counter -= 1
     if @frame_counter <= 0
       @frame_counter = @frame_delay
-      @frame = (@frame + 1) % @anim_frames[@anim_state].length
-
-      @tile_x = @tile_base_x + @anim_frames[@anim_state][@frame]
+      @frame = (@frame + 1) % @anim_frames[@anim_state]
+      @tile_y = @tile_base_y + (@anim_state * @tile_h)
+      @tile_x = @tile_base_x + (@frame * @tile_w)
     end
     
     if @dx != 0
@@ -41,21 +53,32 @@ class Entity
     elsif @dy != 0
       @y += @dy
       @dy = 0
+    elsif @cooldown > 0
+      @cooldown -= 1
+      if @cooldown <= 0
+        @cooldown = 0
+        @anim_state -= 3
+      end
     end
   end
 
-  def move(dx=0, dy=0)
-    if @dx < 0
-      @anim_state = 1
-    elsif @dx > 0
-      @anim_state = 2
-    elsif @dy < 0
-      @anim_state = 3
-    elsif @dy > 0
+  def move(dx=0, dy=0)	  
+    if dx < 0
       @anim_state = 4
+      @flip_horizontally = true
+    elsif dx > 0
+      @anim_state = 4
+      @flip_horizontally = false
+    elsif dy < 0
+      @anim_state = 3
+      @flip_horizontally = false
+    elsif dy > 0
+      @anim_state = 5
+      @flip_horizontally = false
     end
     @dx += dx
     @dy += dy
+    @cooldown = 1
   end
 
   def center_x
