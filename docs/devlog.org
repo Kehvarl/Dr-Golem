@@ -5,7 +5,7 @@
   + Generic Entity
     * Animated Sprite
     * Based on Tilesheets
-      * Player Spritesheet
+      - Player Spritesheet WORKING
 	* Sprites: 48x48
 	* Idle Down 6
 	* Idle Right 6

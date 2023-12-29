@@ -1,0 +1,16 @@
+* Game Plot
+
+** Introduction
+The player is introduced to the quaint village of <name>, where golem crafting
+is a revered tradition
+The player has inherited a workshop for the crafting of golems, and decides
+to continue the family legacy
+
+** Discovering Golem Crafting
+The player follows a series of tutorials giving insights into the properties
+of the enchanted forest surrounding the village
+Quirky and Helpful Characters
+  - Mentor
+  - Friendly Magical Creatures
+
+** Building the first Golem
