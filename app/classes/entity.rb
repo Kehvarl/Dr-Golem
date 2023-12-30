@@ -82,11 +82,11 @@ class Entity
   end
 
   def center_x
-    (self.x + self.w.div(2))
+    (@x + @w.div(2))
   end
 
   def center_y
-    (self.y + self.h.div(2))
+    (@.y + @h.div(2))
   end
 
   def primitive_marker

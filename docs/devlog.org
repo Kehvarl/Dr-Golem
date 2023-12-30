@@ -17,3 +17,35 @@
 	* Attack Right 4
 	* Attack Up 4
 	* Die 3
+
+** 2023-12-28
+- Working on
+  + Map
+    * Options
+      - Tiles
+	* Can be procedurally generated or pre-made
+	* Can make use of mwoods sprites or can find or make new ones
+      - Large Sprite
+	* Must be pre-made
+	* Can fit the map to the narrative or vice versa
+	* Control over progress
+      - Procedurally Generated
+	* Can use RogulikeDev resources
+	* Basically a tile map
+	* No real control over what will be created
+  + Plot
+    * Player is a crafter of golems
+    * Can perform some tasks
+      - Gather Materials
+      - Explore Map
+      - Craft Golems
+      - Assign Golems to Tasks
+    * Cozy Idle Game
+    * Gather resources
+    * Build more stuff
+    * Reset for advantages
+    * No combat
+
+** 2023-12-29
+Plot didn't impact the Generic Entity yet
+Need to work on the game map
