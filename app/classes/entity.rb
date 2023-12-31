@@ -12,6 +12,10 @@ class Entity
     @y = args.y || 480
     @w = args.w || 96
     @h = args.h || 96
+    @vx = 0
+    @vy = 0
+    @target_x = @x
+    @target_y = @y
     @dx = 0
     @dy = 0
     @cooldown = 0
@@ -32,10 +36,12 @@ class Entity
     @frame_counter = @frame_delay
     @tile_x = @tile_base_x = args.tile_x || 0
     @tile_y = @tile_base_y = args.tile_y || 0
-    @tile_w = args.tile_w || 48
-    @tile_h = args.tile_h || 48
+    @tile_w = args.tile_w || 34
+    @tile_h = args.tile_h || 26
     @flip_horizontally = false
-    @path = args.path || 'sprites/mwoods/characters/player.png'
+    @anchor_x = 0.5
+    @anchor_y = 0.0
+    @path = args.path || 'sprites/mwoods/characters/player_edit.png'
   end
 
   def tick args
@@ -45,6 +51,10 @@ class Entity
       @frame = (@frame + 1) % @anim_frames[@anim_state]
       @tile_y = @tile_base_y + (@anim_state * @tile_h)
       @tile_x = @tile_base_x + (@frame * @tile_w)
+    end
+
+    if @x != @target_x or @y != @target_y
+      move_towards_target
     end
     
     if @dx != 0
@@ -62,6 +72,23 @@ class Entity
     end
   end
 
+  def move_towards_target
+    dx = 0
+    dy = 0
+    if @x < @target_x
+      dx = 1
+    elsif @x > @target_x
+      dx = -1
+    end
+    if @y < @target_y
+      dy = 1
+    elsif @y > @target_y
+      dy = -1
+    end
+    move(dx, dy)
+    cooldown = 1
+  end
+
   def move(dx=0, dy=0)	  
     if dx < 0
       @anim_state = 4
@@ -76,9 +103,14 @@ class Entity
       @anim_state = 5
       @flip_horizontally = false
     end
-    @dx += dx
-    @dy += dy
+    @dx = dx
+    @dy = dy
     @cooldown = 1
+  end
+
+  def move_to(tx, ty)
+    @target_x = tx
+    @target_y = ty
   end
 
   def center_x
@@ -86,8 +118,26 @@ class Entity
   end
 
   def center_y
-    (@.y + @h.div(2))
+    (@y + @h.div(2))
   end
+
+  def serialize
+    { x: @x, y: @y, w: @w, h: @h,
+      vx: @vx, vy: @vy,
+      target_x: @target_x, target_y: @target_y,
+      dx: @dx, dy: @dy,
+      anim_frames: @anim_frames, anim_state: @anim_state,
+      frame: @frame
+    }
+  end
+
+  def inspect
+    "#{serialize}"
+  end
+
+  def to_s
+    "#{serialize}"
+  end  
 
   def primitive_marker
     :sprite

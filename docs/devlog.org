@@ -49,3 +49,9 @@
 ** 2023-12-29
 Plot didn't impact the Generic Entity yet
 Need to work on the game map
+
+** 2023-12-30
+Stepping back from the map again
+Might be worthwhile to look into movement a little more
+Instead of keyboard movement, mouse movement might make sense
+So lets look into that
