@@ -14,6 +14,10 @@ def tick args
     args.state.player.move(1,0)
   end
 
+  if args.inputs.mouse.button_left
+    args.state.player.move_to(args.inputs.mouse.x, args.inputs.mouse.y)
+  end
+
   args.state.player.tick args
 
   args.outputs.primitives << args.state.player
