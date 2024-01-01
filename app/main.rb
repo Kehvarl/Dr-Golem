@@ -1,5 +1,6 @@
 
 require('app/classes/entity.rb')
+require('app/classes/game_map.rb')
 
 def new_player
   return {x: 640, y: 480, w: 96, h: 96,
@@ -23,7 +24,14 @@ def new_slime
           path: 'sprites/mwoods/characters/slime.png'}
 end
 
+def new_game_map
+  m = GameMap.new({})
+  m.add_obstacle(480, 240, 240, 60, 128, 128, 128)
+  return m
+end
+
 def tick args
+  args.state.game_map ||= new_game_map
   args.state.player ||= Entity.new(new_player)
   args.state.enemies ||= [Entity.new(new_slime), Entity.new(new_slime),
                           Entity.new(new_slime)]
@@ -51,6 +59,7 @@ def tick args
     e.tick args
   end
 
+  args.outputs.primitives << args.state.game_map.obstacles
   args.outputs.primitives << args.state.player
   args.outputs.primitives << args.state.enemies
 end
