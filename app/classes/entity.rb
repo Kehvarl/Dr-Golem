@@ -48,7 +48,7 @@ class Entity
     end
 
     if moving
-      move_towards_target
+      move_towards_target args
     end
     
     if @dx != 0
@@ -70,7 +70,7 @@ class Entity
     return (@x != @target_x or @y != @target_y)
   end
 
-  def move_towards_target
+  def move_towards_target args
     dx = 0
     dy = 0
     if @x < @target_x
@@ -83,11 +83,11 @@ class Entity
     elsif @y > @target_y
       dy = -1
     end
-    move(dx, dy)
+    move(args, dx, dy)
     cooldown = 1
   end
 
-  def move(dx=0, dy=0)	  
+  def move(args, dx=0, dy=0)	  
     if dx < 0
       @anim_state = 4
       @flip_horizontally = true
@@ -101,9 +101,17 @@ class Entity
       @anim_state = 5
       @flip_horizontally = false
     end
-    @dx = dx
-    @dy = dy
-    @cooldown = 1
+    temp = {x: @x + @dx, y: @y + @dy, w: @w, h: @h}
+    collisions = args.state.game_map.collisions(args, temp)
+    if collisions.length == 0
+      @dx = dx
+      @dy = dy
+      @cooldown = 1
+    else
+      @dx = -dx
+      @dy = -dy
+      @cooldown = 1
+    end
   end
 
   def move_by(dx, dy)

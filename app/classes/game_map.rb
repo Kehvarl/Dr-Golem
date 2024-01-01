@@ -1,18 +1,17 @@
 class GameMap
+  attr_accessor :obstacles, :collisions
   def initialize args
     @w = args.w || 1280
     @h = args.h || 720
-    @tiles = load_map(args)
+    @obstacles = []
   end
 
-  def load_map args
-    out = {}
-    (0..args.h).each |y| do
-      (0..args.w).each |x| do
-        out[(x,y)] = '.'
-      end
-    end
-      
-    end
+  def add_obstacle x, y, w, h, r=128, g=128, b=128
+    @obstacles << {x: x, y: y, w: w, h: h, r: r, g: g, b: b}.solid!
+  end
+
+  def collisions args, entity
+    return args.geometry.find_all_intersect_rect(entity,
+                                                 @obstacles)
   end
 end
