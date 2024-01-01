@@ -19,41 +19,35 @@ class Entity
     @dx = 0
     @dy = 0
     @cooldown = 0
-    # Idle Down
-    # Idle Right
-    # Idle Up
-    # Walk Down
-    # Walk Right
-    # Walk Up
-    # Attack Down
-    # Attack Right
-    # Attack Up
+    # Idle Down, Right, Up
+    # Walk D, R, U
+    # Attack D, R, U
     # Die
-    @anim_frames = args.walk_anim || [6, 6, 6, 6, 6, 6, 4, 4, 4, 3]
+    @anim_frames = args.anim_frames || [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
     @anim_state = args.anim_state || 0
     @frame = args.frame || 0
     @frame_delay = args.frame_delay || 10
     @frame_counter = @frame_delay
     @tile_x = @tile_base_x = args.tile_x || 0
     @tile_y = @tile_base_y = args.tile_y || 0
-    @tile_w = args.tile_w || 34
-    @tile_h = args.tile_h || 26
+    @tile_w = args.tile_w || 80
+    @tile_h = args.tile_h || 80
     @flip_horizontally = false
     @anchor_x = 0.5
     @anchor_y = 0.0
-    @path = args.path || 'sprites/mwoods/characters/player_edit.png'
+    @path = args.path || 'sprites/circle/blue.png'
   end
 
   def tick args
     @frame_counter -= 1
     if @frame_counter <= 0
       @frame_counter = @frame_delay
-      @frame = (@frame + 1) % @anim_frames[@anim_state]
-      @tile_y = @tile_base_y + (@anim_state * @tile_h)
+      @frame = (@frame + 1) % @anim_frames[@anim_state][1]
+      @tile_y = @tile_base_y + (@anim_frames[@anim_state][0]* @tile_h)
       @tile_x = @tile_base_x + (@frame * @tile_w)
     end
 
-    if @x != @target_x or @y != @target_y
+    if moving
       move_towards_target
     end
     
@@ -68,8 +62,12 @@ class Entity
       if @cooldown <= 0
         @cooldown = 0
         @anim_state -= 3
-      end
+        end
     end
+  end
+
+  def moving
+    return (@x != @target_x or @y != @target_y)
   end
 
   def move_towards_target
@@ -106,6 +104,11 @@ class Entity
     @dx = dx
     @dy = dy
     @cooldown = 1
+  end
+
+  def move_by(dx, dy)
+    @target_x = @x +  dx
+    @target_y = @y + dy
   end
 
   def move_to(tx, ty)
