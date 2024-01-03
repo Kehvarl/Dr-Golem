@@ -101,16 +101,20 @@ class Entity
       @anim_state = 5
       @flip_horizontally = false
     end
-    temp = {x: @x + @dx, y: @y + @dy, w: @w, h: @h}
+    temp = {x: @x + dx, y: @y + dy, w: @w, h: @h}
     collisions = args.state.game_map.collisions(args, temp)
     if collisions.length == 0
       @dx = dx
       @dy = dy
       @cooldown = 1
     else
-      @dx = -dx
-      @dy = -dy
-      @cooldown = 1
+      p collisions.length
+      p @x, @y, dx, dy
+      @target_x = @x - dx
+      @target_y = @y - dy
+      @cooldown = 0
+      @dx = 0
+      @dy = 0
     end
   end
 

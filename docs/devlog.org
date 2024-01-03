@@ -55,3 +55,34 @@ Stepping back from the map again
 Might be worthwhile to look into movement a little more
 Instead of keyboard movement, mouse movement might make sense
 So lets look into that
+
+** 2023-12-31
+Added some other entities to the screen and adjusted animations
+to handle different animation lenghts
+
+** 2024-01-01
+Going to just do a branch per day at the moment instead of per topic
+I do poorly at the branch per topic process
+
+1. I need a map to put obstacles on
+   1. A big grid is easy to implement
+   2. Alternatively, obstacles can exist on the same gridless plane as
+      entities.   A map could be a large background image and a list
+      of obstacles.  
+2. Map will implement A* from any arbitrary pixel coordinates to any
+   arbitrary pizel coordinates.
+   1. This means the map will need to know the starting point, size,
+      and anchor for the moving entity and each possible obstacle
+3. Obstacles on map stop movement
+   1. Since entities move towards a target, and move until they reach
+      that target, this is causing an issue.
+   2. When an object is encountered we need to do a few things
+      1. Stop moving.
+	 * Set the target_x and target_y to the position reached just
+	   before colliding with the object
+      2. Check for what we collided with
+	 * Some obstacles may need special handling
+	 * Damage
+	 * Activate special features
+	 * AI reactions
+	 * Trigger game effects
