@@ -86,3 +86,12 @@ I do poorly at the branch per topic process
 	 * Activate special features
 	 * AI reactions
 	 * Trigger game effects
+
+
+** 2024-01-02
+No real progress tonight.
+For some reason altering the collision code to stop all movement
+doesn't seem to work.
+Revisited how I was handling collisions. Similarly named variables
+are a problem.  @dx != dx
+
