@@ -89,9 +89,14 @@ I do poorly at the branch per topic process
 
 
 ** 2024-01-02
-No real progress tonight.
 For some reason altering the collision code to stop all movement
 doesn't seem to work.
 Revisited how I was handling collisions. Similarly named variables
 are a problem.  @dx != dx
 
+** 2024-01-03
+Not quite sure what to work on next
+1. pathfinding
+2. map drawing
+3. enemy collision
+4. entity cleanup
