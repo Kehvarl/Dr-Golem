@@ -39,14 +39,6 @@ class Entity
   end
 
   def tick args
-    @frame_counter -= 1
-    if @frame_counter <= 0
-      @frame_counter = @frame_delay
-      @frame = (@frame + 1) % @anim_frames[@anim_state][1]
-      @tile_y = @tile_base_y + (@anim_frames[@anim_state][0]* @tile_h)
-      @tile_x = @tile_base_x + (@frame * @tile_w)
-    end
-
     if moving
       move_towards_target args
     end
@@ -57,12 +49,28 @@ class Entity
     elsif @dy != 0
       @y += @dy
       @dy = 0
-    elsif @cooldown > 0
+    elsif @cooldown >= 0
       @cooldown -= 1
-      if @cooldown <= 0
-        @cooldown = 0
-        @anim_state -= 3
-        end
+    end
+
+    animate
+  end
+
+  def animate
+    # If was moving and stopped
+    if @cooldown <= 0 and @anim_state >= 3
+      @cooldown = 0
+      @anim_state -= 3
+    end
+
+    
+    # Next frame of animation
+    @frame_counter -= 1
+    if @frame_counter <= 0
+      @frame_counter = @frame_delay
+      @frame = (@frame + 1) % @anim_frames[@anim_state][1]
+      @tile_y = @tile_base_y + (@anim_frames[@anim_state][0]* @tile_h)
+      @tile_x = @tile_base_x + (@frame * @tile_w)
     end
   end
 
@@ -101,6 +109,11 @@ class Entity
       @anim_state = 5
       @flip_horizontally = false
     end
+
+    check_collisions args, dx, dy
+  end
+
+  def check_collisions args, dx, dy
     temp = {x: @x + dx, y: @y + dy, w: @w, h: @h}
     collisions = args.state.game_map.collisions(args, temp)
     if collisions.length == 0
@@ -115,7 +128,7 @@ class Entity
       @cooldown = 0
       @dx = 0
       @dy = 0
-    end
+    end   
   end
 
   def move_by(dx, dy)
