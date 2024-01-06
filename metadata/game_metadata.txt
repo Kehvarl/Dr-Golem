@@ -1,8 +1,8 @@
 # Remove the pound sign and leading space for the properties below before publishing your game.
 devid=kehvarl
 devtitle=Kehvarl
-gameid=cozy-golem
-gametitle=Cozy Golem
+gameid=some-test-mechanics
+gametitle=Mechanics Testing
 version=0.1
 icon=metadata/icon.png
 
