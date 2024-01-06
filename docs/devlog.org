@@ -100,3 +100,33 @@ Not quite sure what to work on next
 2. map drawing
 3. enemy collision
 4. entity cleanup
+
+** 2024-01-04
+Tonight we will look through the entity and do some cleanup
+1. Do all entities move?
+2. Do all entities have animations?
+3. What is an Entity?
+   1. Has a position in space
+   2. Has a sprite representation
+   3. Has some impact on the game
+4. What is an obstacle?
+   1. Has a position in space
+   2. May be represented by 1 or more sprites
+   3. Is the game world's self representation
+Entity cleanup
+  1. Split animation off of the main Tick
+  2. Think about how to generalize the base entity
+     from the animated entity
+
+** 2024-01-05
+There are animated and non animated entities
+There are mobile and immobile entities
+There are entities can can attack
+There are entities that can hold things
+There are entities that can spawn other entities
+There are entities that represent non-entities
+  + Consumables
+  + Equippables
+  + Treasure
+  + Triggers
+Everything else is probably an Obstacle
