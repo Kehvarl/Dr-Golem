@@ -130,3 +130,10 @@ There are entities that represent non-entities
   + Treasure
   + Triggers
 Everything else is probably an Obstacle
+
+** 2024-01-06
+Stripped out some naming, made sure to reference the
+creator of the sprites I'm using currently as well.
+
+** 2024-01-07
+Need to fix all the whitespace around the sprites.
