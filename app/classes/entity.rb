@@ -28,6 +28,10 @@ class Entity
     @frame = args.frame || 0
     @frame_delay = args.frame_delay || 10
     @frame_counter = @frame_delay
+    @sprite_w = args.tile_w || 80
+    @sprite_h = args.tile_h || 80
+    @padding_x = args.padding_x || 0
+    @padding_y = args.padding_y || 0
     @tile_x = @tile_base_x = args.tile_x || 0
     @tile_y = @tile_base_y = args.tile_y || 0
     @tile_w = args.tile_w || 80
