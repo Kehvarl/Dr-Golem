@@ -3,12 +3,14 @@ require('app/classes/entity.rb')
 require('app/classes/game_map.rb')
 
 def new_player
-  return {x: 640, y: 480, w: 96, h: 96,
+  return {x: 640, y: 480, w: 16, h: 46,
           anim_frames: [[0,6], [1,6], [2,6],
                         [3,6], [4,6], [5,6],
                         [6,4], [7,4], [8,4], [9,3]],
           frame_delay: 10, tile_x: 0, tile_y: 0,
           tile_w: 48, tile_h: 48,
+          sprite_w: 24, sprite_h: 24,
+          padding_x: 16, padding_y: 6,
           path: 'sprites/mwoods/characters/player.png'}
 end
 
