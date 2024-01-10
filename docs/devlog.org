@@ -137,3 +137,22 @@ creator of the sprites I'm using currently as well.
 
 ** 2024-01-07
 Need to fix all the whitespace around the sprites.
+
+** 2024-01-08
+A sprite sheet has some Rows
+A Row has some Columns
+Each Sprite (Row, Column) has some padding
+The drawn sprite is at location Row*H + padding_Y, Col*W+padding_X
+Player padding is 16w, 1h
+Drawn width = W - (2*padding_x)
+Drawn height = H - (2*padding_y)
+Need
+Sprite_Width
+Sprite_Height
+Padding_X
+Padding_Y
+
+** 2024-01-09
+Implemented some of the padding stuff.
+Need a lot more flexibility there.
+

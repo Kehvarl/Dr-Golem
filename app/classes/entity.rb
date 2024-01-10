@@ -37,7 +37,7 @@ class Entity
     @tile_w = args.tile_w || 80
     @tile_h = args.tile_h || 80
     @flip_horizontally = false
-    @anchor_x = 0.5
+    @anchor_x = 0.0
     @anchor_y = 0.0
     @path = args.path || 'sprites/circle/blue.png'
   end
@@ -73,8 +73,10 @@ class Entity
     if @frame_counter <= 0
       @frame_counter = @frame_delay
       @frame = (@frame + 1) % @anim_frames[@anim_state][1]
-      @tile_y = @tile_base_y + (@anim_frames[@anim_state][0]* @tile_h)
-      @tile_x = @tile_base_x + (@frame * @tile_w)
+      @tile_y = @tile_base_y + (@anim_frames[@anim_state][0]* @sprite_h) + @padding_y
+      @tile_x = @tile_base_x + (@frame * @sprite_w) + @padding_x
+      @tile_h = @sprite_h - (2 * @padding_y)
+      @tile_w = @sprite_w - (2 * @padding_x)
     end
   end
 
@@ -125,8 +127,6 @@ class Entity
       @dy = dy
       @cooldown = 1
     else
-      p collisions.length
-      p @x, @y, dx, dy
       @target_x = @x - dx
       @target_y = @y - dy
       @cooldown = 0
