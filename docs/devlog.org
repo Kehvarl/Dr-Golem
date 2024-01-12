@@ -158,3 +158,17 @@ Need a lot more flexibility there.
 
 ** 2024-01-10
 No progress to report
+
+** 2024-01-11
+How to implement movement
+1. Follow the RLD tutorial and have an AI class we instance
+   1. Pros:
+      1. unique AI per unit
+      2. Store and track state in the unit/ai itself
+      3. can basically copy the RLD template
+2. Have a sort of ECS thing where an AI system handles all
+   the existing mobile units
+   1. Pros:
+      1. Fewer instanced AI copies
+      2. Might be easier to build in the end
+
