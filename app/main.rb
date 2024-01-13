@@ -8,8 +8,8 @@ def new_player
                         [3,6], [4,6], [5,6],
                         [6,4], [7,4], [8,4], [9,3]],
           frame_delay: 10, tile_x: 0, tile_y: 0,
-          tile_w: 48, tile_h: 48,
-          sprite_w: 24, sprite_h: 24,
+          tile_w: 24, tile_h: 36,
+          sprite_w: 48, sprite_h: 48,
           padding_x: 16, padding_y: 6,
           path: 'sprites/mwoods/characters/player.png'}
 end
@@ -23,6 +23,7 @@ def new_slime
                         [3,3], [3,3], [3,3], [4,5]],
           frame_delay: 10, tile_x: 0, tile_y: 0,
           tile_w: 32, tile_h: 32,
+          sprite_w: 32, tile_h: 32,
           path: 'sprites/mwoods/characters/slime.png'}
 end
 

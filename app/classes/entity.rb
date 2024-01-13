@@ -23,13 +23,16 @@ class Entity
     # Walk D, R, U
     # Attack D, R, U
     # Die
-    @anim_frames = args.anim_frames || [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+    @anim_frames = args.anim_frames || [[0,1], [0,1], [0,1],
+                                        [0,1], [0,1], [0,1],
+                                        [0,1], [0,1], [0,1],
+                                        [0,1]]
     @anim_state = args.anim_state || 0
     @frame = args.frame || 0
     @frame_delay = args.frame_delay || 10
     @frame_counter = @frame_delay
-    @sprite_w = args.tile_w || 80
-    @sprite_h = args.tile_h || 80
+    @sprite_w = args.sprite_w || 80
+    @sprite_h = args.sprite_h || 80
     @padding_x = args.padding_x || 0
     @padding_y = args.padding_y || 0
     @tile_x = @tile_base_x = args.tile_x || 0
@@ -66,17 +69,14 @@ class Entity
       @cooldown = 0
       @anim_state -= 3
     end
-
     
     # Next frame of animation
     @frame_counter -= 1
     if @frame_counter <= 0
       @frame_counter = @frame_delay
       @frame = (@frame + 1) % @anim_frames[@anim_state][1]
-      @tile_y = @tile_base_y + (@anim_frames[@anim_state][0]* @sprite_h) + @padding_y
+      @tile_y = @tile_base_y + (@anim_frames[@anim_state][0] * @sprite_h) + @padding_y
       @tile_x = @tile_base_x + (@frame * @sprite_w) + @padding_x
-      @tile_h = @sprite_h - (2 * @padding_y)
-      @tile_w = @sprite_w - (2 * @padding_x)
     end
   end
 
