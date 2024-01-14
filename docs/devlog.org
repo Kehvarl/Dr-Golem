@@ -172,3 +172,7 @@ How to implement movement
       1. Fewer instanced AI copies
       2. Might be easier to build in the end
 
+** 2024-01-13
+No progress to report on this day
+Need to fix the changes that broke sprite rendering
+
