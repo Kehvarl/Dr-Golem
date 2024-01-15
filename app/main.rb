@@ -3,7 +3,7 @@ require('app/classes/entity.rb')
 require('app/classes/game_map.rb')
 
 def new_player
-  return {x: 640, y: 480, w: 16, h: 46,
+  return {x: 640, y: 480, w: 36, h: 44,
           anim_frames: [[0,6], [1,6], [2,6],
                         [3,6], [4,6], [5,6],
                         [6,4], [7,4], [8,4], [9,3]],
@@ -17,13 +17,14 @@ end
 def new_slime
   return {x: [40, 80, 120, 240, 480, 920, 1040, 1120, 1160].sample(),
           y: [40, 80, 120, 240, 360, 600, 660].sample(),
-          w: 64, h: 64,
+          w: 32, h: 32,
           anim_frames: [[0,4], [0,4], [0,4],
                         [1,6], [1,6], [2,7],
                         [3,3], [3,3], [3,3], [4,5]],
           frame_delay: 10, tile_x: 0, tile_y: 0,
-          tile_w: 32, tile_h: 32,
-          sprite_w: 32, tile_h: 32,
+          tile_w: 16, tile_h: 24,
+          sprite_w: 32, sprite_h: 32,
+          padding_x: 8, padding_y: 4,
           path: 'sprites/mwoods/characters/slime.png'}
 end
 
